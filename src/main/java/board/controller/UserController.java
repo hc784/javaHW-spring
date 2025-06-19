@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import board.dto.LoginRequest;
+import board.dto.LoginResponse;
 import board.dto.SignupRequest;
 import board.entity.User;
 import board.service.UserService;
@@ -21,8 +22,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Long login(@RequestBody @Valid LoginRequest req) {
+    public LoginResponse login(@RequestBody @Valid LoginRequest req) {
         User user = userService.login(req);
-        return user.getId();    // 간단히 userId 반환 → Swing 쪽에서 세션처럼 사용
+        return new LoginResponse(user.getId(), user.getUsername(), user.isAdmin());
     }
 }

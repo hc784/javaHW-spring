@@ -36,4 +36,18 @@ public class CommentController {
         return commentService.findByPost(postService.findById(postId))
                 .stream().map(CommentResponse::from).toList();
     }
+    
+    @PutMapping("/{id}")
+    public CommentResponse edit(@PathVariable Long id,
+                                @RequestParam Long userId,
+                                @RequestBody @Valid CommentRequest req) {
+        return CommentResponse.from(
+                commentService.update(id, userService.findById(userId), req));
+    }
+
+    @DeleteMapping("/{id}")
+    public void remove(@PathVariable Long id,
+                       @RequestParam Long userId) {
+        commentService.delete(id, userService.findById(userId));
+    }
 }

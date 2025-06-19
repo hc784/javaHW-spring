@@ -26,4 +26,9 @@ public class Post {
     private User author;
 
     private LocalDateTime createdAt;
+    
+    public void update(String title, String content) {   // ★ 추가
+        this.title = title;
+        this.content = content;
+    }
 }

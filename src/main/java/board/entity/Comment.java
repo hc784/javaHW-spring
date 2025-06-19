@@ -25,4 +25,9 @@ public class Comment {
     private User author;
 
     private LocalDateTime createdAt;
+    
+    /* ★ 댓글 내용 수정용 메서드 */
+    public void update(String content) {
+        this.content = content;
+    }
 }
